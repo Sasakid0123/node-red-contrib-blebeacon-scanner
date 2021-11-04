@@ -1,5 +1,5 @@
 {
-  "name": "node-red-contrib-blebeacon-scanner",
+  "name": "node-red-contrib-blebeacon-scanner2",
   "version": "1.0.1",
   "description": "node for BLE Beacon",
   "main": "node.js",

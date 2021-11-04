@@ -46,40 +46,40 @@ module.exports = function(RED) {
     }
     RED.nodes.registerType("BLE Beacon Scanner with Control",BLEBeaconNodeControl);
 
-    function BLEBeaconNode(config) {
-        RED.nodes.createNode(this,config);
-        var node = this;
+    // function BLEBeaconNode(config) {
+    //     RED.nodes.createNode(this,config);
+    //     var node = this;
 
-        scanner.onadvertisement = (ad) => {
-	    if(ad !== null)
-	    {
-                node.send({
-                   payload: ad
-                });
-	    }
-        };
+    //     scanner.onadvertisement = (ad) => {
+	//     if(ad !== null)
+	//     {
+    //             node.send({
+    //                payload: ad
+    //             });
+	//     }
+    //     };
 
-        scanner.startScan().then(() => {
-            node.status({
-                fill: "green",
-                shape: "dot",
-                text: "Scanning Started"
-            });
-        }).catch((error) => {
-            node.status({
-                fill: "red",
-                shape: "dot",
-                text: error
-            });
-        });
+    //     scanner.startScan().then(() => {
+    //         node.status({
+    //             fill: "green",
+    //             shape: "dot",
+    //             text: "Scanning Started"
+    //         });
+    //     }).catch((error) => {
+    //         node.status({
+    //             fill: "red",
+    //             shape: "dot",
+    //             text: error
+    //         });
+    //     });
 
-        node.on('close', function(done) {
-            scanner.stopScan();
-            done();
-        });
+    //     node.on('close', function(done) {
+    //         scanner.stopScan();
+    //         done();
+    //     });
         
-    }
-    RED.nodes.registerType("BLE Beacon Scanner",BLEBeaconNode);
+    // }
+    // RED.nodes.registerType("BLE Beacon Scanner",BLEBeaconNode);
 }
 
 
