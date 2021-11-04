@@ -1,24 +1,23 @@
-module.exports = function(RED) {
+module.exports = function (RED) {
 
     "use strict";
     const BeaconScanner = require('./scanner.js');
     const scanner = new BeaconScanner();
 
     function BLEBeaconNodeControl(config) {
-        RED.nodes.createNode(this,config);
+        RED.nodes.createNode(this, config);
         var node = this;
 
         scanner.onadvertisement = (ad) => {
-	    if(ad !== null)
-	    {
+            if (ad !== null) {
                 node.send({
-                   payload: ad
+                    payload: ad
                 });
-	    }
+            }
         };
 
-        node.on('input', async (msg) => {
-            if (msg.payload === true){
+        node.on('input', function(msg) {
+            if (msg.payload === true) {
                 scanner.startScan().then(() => {
                     node.status({
                         fill: "green",
@@ -38,25 +37,25 @@ module.exports = function(RED) {
             }
         });
 
-        node.on('close', function(done) {
+        node.on('close', function (done) {
             scanner.stopScan();
             done();
         });
-        
+
     }
-    RED.nodes.registerType("BLE Beacon Scanner with Control",BLEBeaconNodeControl);
+    RED.nodes.registerType("BLE Beacon Scanner with Control", BLEBeaconNodeControl);
 
     // function BLEBeaconNode(config) {
     //     RED.nodes.createNode(this,config);
     //     var node = this;
 
     //     scanner.onadvertisement = (ad) => {
-	//     if(ad !== null)
-	//     {
+    //     if(ad !== null)
+    //     {
     //             node.send({
     //                payload: ad
     //             });
-	//     }
+    //     }
     //     };
 
     //     scanner.startScan().then(() => {
@@ -77,7 +76,7 @@ module.exports = function(RED) {
     //         scanner.stopScan();
     //         done();
     //     });
-        
+
     // }
     // RED.nodes.registerType("BLE Beacon Scanner",BLEBeaconNode);
 }
