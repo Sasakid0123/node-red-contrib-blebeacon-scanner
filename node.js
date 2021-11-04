@@ -17,8 +17,8 @@ module.exports = function(RED) {
 	    }
         };
 
-        node.on('input', function(msg) {
-            if (msg.payload){
+        node.on('input', async (msg) => {
+            if (msg.payload === true){
                 scanner.startScan().then(() => {
                     node.status({
                         fill: "green",
